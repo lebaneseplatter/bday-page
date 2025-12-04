@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bday page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="section_1">
+      <div class="image-container" id="imageContainer">
+        <img src="aludon.png" alt="Happy bday poster for alu" id="bdayImage" />
+      </div>
+      <div class="text-box">
+        <h1>Happy Birthday my Alu ki Pakodi</h1>
+        <p>
+          stay blessed always and keep calling me <b>kuchupuchuku</b>, i love
+          this name and you so much now.
+        </p>
+      </div>
+    </div>
+    <div id="section_2">
+      <p>
+        <b
+          >so heres a little surprise, turn ur volume up and then click on ur
+          image. <b>Keep clicking if u want more confetti.</b> (u can also download this design by clicking
+          <u id="downloadLink" style="cursor: pointer;"><b>here</b></u> and u should cuz i made this and it took
+          forever)</b
+        >
+      </p>
+    </div>
+
+    <script>
+      const imageContainer = document.getElementById("imageContainer");
+      const section1 = document.getElementById("section_1");
+      const colors = [
+        "#ff0000",
+        "#00ff00",
+        "#0000ff",
+        "#ffff00",
+        "#ff00ff",
+        "#00ffff",
+        "#ffa500",
+        "#ff69b4",
+      ];
+
+      // Create audio element for birthday song
+      const birthdayAudio = new Audio("bday song.mp3");
+      let isPlaying = false;
+      let songDuration = 0;
+
+      // Get song duration once it's loaded
+      birthdayAudio.addEventListener("loadedmetadata", () => {
+        songDuration = birthdayAudio.duration;
+      });
+
+      // Track when song ends
+      birthdayAudio.addEventListener("ended", () => {
+        isPlaying = false;
+      });
+
+      function createConfetti() {
+        const confettiCount = 100;
+        const containerRect = section1.getBoundingClientRect();
+
+        for (let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement("div");
+          confetti.className = "confetti";
+          confetti.style.left = Math.random() * containerRect.width + "px";
+          confetti.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDelay = Math.random() * 0.5 + "s";
+          confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
+
+          section1.appendChild(confetti);
+
+          // Trigger animation
+          setTimeout(() => {
+            confetti.classList.add("active");
+          }, 10);
+
+          // Remove confetti after animation
+          setTimeout(() => {
+            confetti.remove();
+          }, 5000);
+        }
+      }
+
+      function playBirthdaySong() {
+        if (!isPlaying) {
+          isPlaying = true;
+          birthdayAudio.currentTime = 0;
+          birthdayAudio.play().catch((err) => {
+            console.log("Audio play failed:", err);
+            isPlaying = false;
+          });
+        }
+      }
+      // Trigger confetti AND music on click
+      imageContainer.addEventListener("click", () => {
+        createConfetti();
+        if (!isPlaying) {
+          playBirthdaySong();
+        }
+      });
+
+            const downloadLink = document.getElementById("downloadLink");
+      const bdayImage = document.getElementById("bdayImage");
+
+      downloadLink.addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.href = bdayImage.src;
+        link.download = "aludon.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    </script>
+  </body>
+</html>

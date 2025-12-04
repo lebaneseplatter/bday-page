@@ -1,0 +1,81 @@
+body{
+    background-color: brown;
+    padding: 20px;
+    margin: 0;
+    overflow-x: hidden;
+}
+#section_1{
+    background-color: burlywood;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    border-radius: 30px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.text-box h1{
+    margin: 0;
+    color: brown;
+    max-width: 1000px;
+    font-family: Comfortaa, sans-serif;
+    font-size: 100px;
+}
+.text-box p{
+    font-size: 40px;
+    margin: 0;
+    color: rgb(173, 6, 6);
+    max-width: 1000px;
+    font-family: Comfortaa, sans-serif;
+}
+.image-container {
+    position: relative;
+    cursor: pointer;
+}
+#section_1 img{
+    display: block;
+    border-radius: 10px;
+    height: 500px;
+    transition: 0.5s;
+} 
+#section_1 img:hover{
+    transform: scale(1.01);
+}
+#section_2{
+    background-color: burlywood;
+    margin-top: 10px;
+    border-radius: 30px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+#section_2 p{
+    text-align: center;
+    color: brown;
+    font-family: Comfortaa;
+    /* max-width: 900px; */
+}
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -20px;
+    opacity: 0;
+    pointer-events: none;
+    border-radius: 50%;
+}
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(600px) rotate(720deg);
+        opacity: 0;
+    }
+}
+.confetti.active {
+    animation: confetti-fall 3s ease-in forwards;
+}
